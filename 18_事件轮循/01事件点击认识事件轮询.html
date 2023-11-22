@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">点击</button>
+  <button id="btn1">点击1</button>
+  <script>
+    const btn = document.getElementById('btn')
+
+    btn.addEventListener('click', () => {
+      Promise.resolve().then(() => console.log('Microtask 1'))
+      console.log('Listener 1')
+    })
+
+    btn.addEventListener('click', () => {
+      Promise.resolve().then(() => {console.log('Microtask 2')})
+      console.log('Listener 2')
+    })
+    // btn.click()
+    const arr = Array.from({length: 10000000}, (_, i) => {
+      return {id: i, name: 'zs', age: 18}
+    })
+    console.log(arr)
+    const arrData = [
+      {name: 'zs', age: 18},
+      {name: 'ls', age: 20},
+      {name: 'ww', age: 21},
+      {name: 'qq', age: 52},
+      {name: 'qq', age: 52},
+      {name: 'qq', age: 52},
+      {name: 'qq', age: 52},
+      {name: 'zs', age: 18},
+      {name: 'ls', age: 20},
+      {name: 'ww', age: 21},
+      {name: 'qq', age: 52},
+      {name: 'zs', age: 18},
+      {name: 'ls', age: 20},
+      {name: 'ww', age: 21},
+      {name: 'qq', age: 52},
+      {name: 'zs', age: 18},
+      {name: 'ls', age: 20},
+      {name: 'ww', age: 21},
+      {name: 'qq', age: 52},
+    ]
+    console.time('html1')
+    let html1 = '' 
+    arr.map(item => {
+      html1 += `<li>姓名:${item.name}, 年龄: ${item.age}</li>`
+    })
+    console.log(html1)
+    console.timeEnd('html1')
+    console.time('html')
+    const html = arr.reduce((pre, cur) => {
+      // if (typeof pre === 'object') {
+      //   return `<li>姓名:${pre.name}, 年龄: ${pre.age}</li>` + `<li>姓名:${cur.name}, 年龄: ${cur.age}</li>`
+      // } 
+     return pre + `<li>姓名:${cur.name}, 年龄: ${cur.age}</li>`
+    }, ``)
+    console.log(html)
+    console.timeEnd('html')
+  </script>
+</body>
+</html>

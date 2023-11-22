@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symbol iterator</title>
+</head>
+<body>
+  <h1>自定义生成遍历数据</div>
+    <script>
+      const school = {
+        name: '前端大学',
+        stus: [
+          'js',
+          'html',
+          'css',
+          'es6'
+        ],
+        [Symbol.iterator]() {
+          let index = 0
+          return {
+            next:() => {
+              if (index < this.stus.length) {
+                let result = {value: this.stus[index], done: false}
+                index++
+                return result
+              } else {
+                return {value: undefined, done: true}
+              }
+            }
+          }
+        }
+      }
+
+      for (const iterator of school) {
+        // console.log(iterator, 'iterator')
+      }
+
+      const obj = {
+        name: '小明',
+        age: 18,
+        sex: '男'
+      }
+
+      for (const key in obj) {
+        // console.log(key, obj[key], 'iterator');
+      }
+
+      const array = [2,4,6,8,10]
+      // console.log(array.__proto__ === Array.prototype, 'prototype');
+      array.__proto__.say = () => {
+        console.log('gun')
+      }
+      array.__proto__[Symbol.iterator] = function () {
+        console.log(this)
+        let index = 0
+        return {
+          next: () => {
+            if (index < this.length) {
+              const result = {value: index, done: false}
+              index ++
+              return result
+            } else {
+              return {value: undefined, done: true}
+            }
+          }
+        }
+      }
+      for (const iterator of array) {
+        console.log('iterator: ', iterator)
+      }
+    </script>
+</body>
+</html>

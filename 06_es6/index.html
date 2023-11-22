@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <script src="./index.js"></script> -->
+  <!-- <script src="./iterator.js"></script> -->
+  <!-- <script src="./set.js"></script> -->
+  <!-- <script src="./class.js"></script> -->
+  <!-- <script type="module">
+    import {add, name} from './module.js'
+    const result = add(1,2)
+  </script> -->
+
+  <!-- <script>
+
+    const a = {
+      [Symbol.iterator]: function () {
+        let a = true
+        return {
+          next:function () {
+            if (a) {
+              a = false
+              return {value: 666, done: false}
+            }
+            return {value: 666, done: true}
+          }
+        }
+      }
+    }
+
+    for (const iterator of a) {
+      console.log(iterator, 'aaaa')
+    }
+
+  </script> -->
+
+  <script>
+
+
+// upload (data) {
+// 		const {formData, url, filePath} = data
+// 		return new Promise((resolve, reject) => {
+// 			wx.uploadFile({
+// 				url,
+// 				filePath,
+// 				method: 'POST',
+// 				header: {
+// 					'content-type': 'application/x-www-form-urlencoded',
+// 				},
+// 				name: 'file',
+// 				formData,
+// 				success(res) {
+// 					resolve(res)
+// 				},
+// 				fail(err) {
+// 					reject(err);
+// 				},
+// 			})
+// 		})
+// 	}
+
+
+//   getOssAccess: data => request.get('/aliyun/oss/appletVideoPolicy', paramsData(data)), //获取oss的access 
+// 	uploadFile: data =>  request.upload(data), // 上传视频
+
+    const name = 'yangliukun'
+    const age = 19
+    const obj = { name, age: age }
+    console.log(obj)
+  </script>
+</body>
+</html>

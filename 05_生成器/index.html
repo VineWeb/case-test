@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生成器</title>
+</head>
+<body>
+  <script>
+    function * gen () {
+      yield "锄禾日当午"
+      yield "汗滴禾下土"
+      yield "谁知盘中餐"
+      yield "粒粒皆辛苦"
+    }
+
+    const iterator = gen()
+    const a =iterator.next()
+    const b =iterator.next()
+    const c =iterator.next()
+    const d =iterator.next()
+    const e =iterator.next()
+    console.log(a)
+    console.log(b)
+    console.log(c)
+    console.log(d)
+    console.log(e)
+
+    for (const val of gen()) {
+      console.log('gen()', val)
+    }
+  </script>
+</body>
+</html>

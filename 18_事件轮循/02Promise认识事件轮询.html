@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    async function async1() {
+      console.log('A')
+      await async2()
+      console.log('B')
+    }
+    async function async2 () {
+      console.log('C')
+    }
+    console.log('D')
+    setTimeout(() => {
+      console.log('E')
+    }, 0)
+    async1()
+    new Promise((resolve) => {
+      console.log('F')
+      resolve()
+    }).then(() => {
+      console.log('G')
+    })
+    console.log('H')
+    // D A C F H B G E
+  </script>
+</body>
+</html>

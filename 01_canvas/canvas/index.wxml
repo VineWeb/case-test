@@ -1,0 +1,7 @@
+<!--pages/test/index.wxml-->
+<view class="test">
+	<canvas type="2d" id="canvas" class="canvas" bindtouchstart="bindtouchstart" bindtouchend="bindtouchend"></canvas>
+	<!-- <canvas type="2d" id="canvas-1" class="canvas1"></canvas> -->
+	<button bindtap="onCreatePoster">点击生成画布</button>
+	<image class="img" mode="aspectFit" src="{{src}}"></image>
+</view>

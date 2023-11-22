@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>水平垂直居中</title>
+  <style>
+    /* start 统一样式处理 */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .parent {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 20px;
+      margin-right: 20px;
+      background-color: red;
+    }
+    .child {
+      background-color: blue;
+      width: 100px;
+      height: 100px;
+    }
+    /* end 统一样式处理 */
+    /* body 使用flex布局 */
+    body {
+      display: flex;
+    }
+
+    /* 第一种start: 使用Flexbox布局，不用考虑子元素宽高 (常用) */
+    .parent1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* 第一种end: 使用Flexbox布局，不用考虑子元素宽高 (常用) */
+
+    /* 第二种start: 父元素相对定位，子元素绝对定位, 外加transform: translate(-50%, -50%); 不用考虑子元素宽高 (常用)*/
+    .parent2 {
+      position: relative;
+    }
+    .child2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    /* 第二种end: 父元素相对定位，子元素绝对定位, 外加transform: translate(-50%, -50%); 不用考虑子元素宽高 (常用)*/
+
+    /* 第三种start: 父元素相对定位，子元素绝对定位, 外加margin: -子元素高度一半, 0, 0, -子元素宽度一半; 子元素宽高未知不适用!!! */
+    .parent3 {
+      position: relative;
+    }
+    .child3 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -50px;  /* 向上移动子元素高度一半 */
+      margin-left: -50px; /* 向左移动子元素宽度一半 */
+    }
+    /* 第三种end: 父元素相对定位，子元素绝对定位, 外加margin: -子元素高度一半, 0, 0, -子元素宽度一半; 子元素宽高未知不适用!!! */
+
+    /* 第四种start: 父元素相对定位，子元素绝对定位, 外加margin: auto; 较常用 */ 
+    .parent4 {
+      position: relative;
+    }
+    .child4 {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+    }  
+    /* 第四种end: 父元素相对定位，子元素绝对定位, 外加margin: auto; 较常用*/
+
+    /* 第五种start: 父元素是块级元素，子元素设置行内块级元素, 外加margin-top: -子元素高度一半, 不常用 */ 
+    .parent5 {
+      text-align: center;
+    }
+    .child5 {
+      display: inline-block;
+      margin-top: 50px;
+    }  
+    /* 第五种end: 父元素是块级元素，子元素设置行内块级元素, 外加margin-top: -子元素高度一半, 不常用 */
+  </style>
+</head>
+<body>
+  <div class="parent parent1">
+    <div class="child child1"></div>
+  </div>
+  <div class="parent parent2">
+    <div class="child child2"></div>
+  </div>
+  <div class="parent parent3">
+    <div class="child child3"></div>
+  </div>
+  <div class="parent parent4">
+    <div class="child child4"></div>
+  </div>
+  <div class="parent parent5">
+    <div class="child child5"></div>
+  </div>
+</body>
+</html>

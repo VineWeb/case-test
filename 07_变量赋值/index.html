@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>变量赋值问题</title>
+</head>
+<body>
+  <script>
+    var a = {name: 'tom', age: 12}
+    b = a
+    a = {name: 'A', age: 13 }
+    b.age = 14
+    console.log(a, b)
+
+    function fn(obj) {
+      obj.age = 15
+      console.log(obj)
+    }
+    fn(a)
+
+    console.log(a, '666')
+  </script>
+</body>
+</html>

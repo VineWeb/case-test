@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    setTimeout(() => {
+      console.log(1)
+    }, 20)
+
+    console.log(2)
+
+    setTimeout(() => {
+      console.log(3)
+    }, 10);
+
+    console.log(4)
+
+    console.time("for")
+    for (let index = 0; index < 90000000; index++) {
+      // TODO
+      if (index === 666) {
+        console.log('...TODO')
+      }
+    }
+    // 耗时60ms左右 加入是 X ms
+    console.timeEnd("for")
+    console.log(5)
+    setTimeout(()=> { 
+      console.log(6)
+    }, 20) // X + 20 ms
+    console.log(7)
+    setTimeout(()=> {
+      console.log(8)
+    }, 10) // X + 10 ms
+
+    // 2 4 ...TODO 5 7 3 1 8 6
+  </script>
+</body>
+</html>

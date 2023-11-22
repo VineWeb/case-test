@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>測試CANVAS</title>
+  <style>
+    body {
+      background-color: orange;
+    }
+    #canvas {
+      border: 2px solid green;
+    }
+    #canvas1 {
+      display: none;
+      border: 2px solid red;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="662" height="440"></canvas>
+  <canvas id="canvas1" width="200" height="200"></canvas>
+  <button onclick="clickBtn()">点击我</button>
+  <script>
+    function clickBtn() {
+      console.log('点击')
+      const canvas1 = document.getElementById('canvas1')
+      canvas1.style.display = 'block'
+      console.log(canvas1)
+    }
+    const canvas = document.getElementById('canvas')
+    const ctx = canvas.getContext('2d')
+    // ctx.font = "32px serif";
+    // ctx.fillStyle="blue"
+    // ctx.fillText("Hello world", 50, 90);
+    // ctx.save()
+    // ctx.restore()
+    const canvas1 = document.getElementById('canvas1')
+    const ctx1 = canvas1.getContext('2d')
+   
+    // ctx1.beginPath();
+    // ctx1.arc(100, 100, 50, 0, 2 * Math.PI, false);
+    // ctx1.stroke();
+   
+    function createCircleImage (ctx, x, y, r) {
+      const src = 'https://oss.urdlab.com/computableVillage/2022/202210/20221017/1665992599446/2.png?x-oss-process=image/resize,m_fill,h_193,w_193'
+      console.log(1)
+      const img = new Image()
+      img.src = src
+      ctx.beginPath();
+      img.onload = function () {
+        console.log(2)
+        ctx.arc(100, 100, 50, 0, 2 * Math.PI, false);
+        ctx.clip()
+        ctx.drawImage(img, 50, 50, 100, 100)
+      }
+      console.log(3)
+    }
+    createCircleImage(ctx1, 100, 100, 50)
+
+
+    function createRectRadius (ctx, x=0, y=0, w=662, h=440, r=8) {
+      if (w < 2* r) r = w/2 
+      if (h < 2* r) r = h/2 
+      // 开始绘制
+      ctx.beginPath()
+      ctx.moveTo(x+r, y)
+      ctx.arcTo(x+w, y, x+w, y+h, r)
+      ctx.arcTo(x+w, y+h, x, y+h, r)
+      ctx.arcTo(x, y+h, x, y, r)
+      ctx.arcTo(x, y, x+w, y, r)
+      ctx.closePath()
+      ctx.fillStyle = '#fff'
+      ctx.fill()
+    }
+    createRectRadius(ctx)
+
+
+    foo();
+    function foo () {
+      console.log(1);
+    }
+    var foo = function () {
+      console.log(2)
+    }
+    function foo () {
+      console.log(3);
+    }
+    // var a = true
+    // if (a) {
+    //   function foo() {
+    //     console.log("a")
+    //   }
+    // }
+    // else {
+    //   function foo() {
+    //     console.log("b")
+    //   }
+    // }
+    
+  </script>
+</body>
+</html>

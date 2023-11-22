@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>事件冒泡例子</title>
+</head>
+<body>
+  <div id="box">点击我</div>
+</body>
+<script>
+  const boxDiv = document.getElementById('box')
+  const body = document.body
+  const html = document.documentElement
+  boxDiv.addEventListener('click', function(e) {
+    console.log('boxDiv add click',this)
+    e.stopPropagation()
+  })
+  body.addEventListener('click', function(e) {
+    console.log('body', this)
+  })
+  html.addEventListener('click', function(e) {
+    console.log('html:', this)
+  })
+  document.addEventListener('click', function(e) {
+    console.log('document:', this)
+  })
+
+  // pd lanyinxiucao1995&&
+</script>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+    1.
+    *访问一个对象的属性时,
+      *先在自身属性中查找, 找到返回
+      *如果没有,再沿着__proto__这条链向上查找,找到返回
+      *如果最终没有找到,返回null
+    *别名: 隐式原型链
+    *作用: 查找对象的属性(方法)
+    2.构造函数/原型/实体对象的关系1
+    3.构造函数/原型/实体对象的关系2
+    */
+    // function Fun () {
+
+    // }
+
+    // console.log(Fun.prototype)
+    // const fun = new Fun()
+    // console.log(fun.__proto__)
+    // console.log(fun.__proto__ === Fun.prototype)
+
+
+    // function Foo() {
+
+    // }
+
+    // var foo1 = new Foo()
+
+
+    function Fn () {
+
+    }
+    Fn.prototype.n = 1
+
+    var fn1 = new Fn()
+
+    Fn.prototype = {
+      n: 2, 
+      m: 3
+    }
+
+    var fn2 = new Fn()
+
+    // console.log(fn1.n, fn1.m, fn2.n, fn2.m) // 1 undefined 2 3
+
+
+
+
+  </script>
+
+  <script>
+    function Foo() {
+
+    }
+    Object.prototype.test1 = function () {
+      console.log('test1()')
+    }
+
+    Function.prototype.test2 = function () {
+      console.log('test2')
+    }
+
+    const foo1 = new Foo()
+
+    foo1.test1() // test1
+    // foo1.test2() // foo1.test2 is not a function
+    Foo.test1() // test1
+    Foo.test2() // test2
+
+
+  // 变量提升  函数提升
+
+  </script>
+</body>
+</html>

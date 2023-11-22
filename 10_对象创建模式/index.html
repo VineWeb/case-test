@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象创建方式</title>
+</head>
+<body>
+  <script>
+    var p = {
+      name: 'Tom',
+      age: 20,
+      setName : function (name) {
+        console.log(this, 'p')
+        this.name = name
+      }
+    }
+    console.log(p, 'forward')
+    p.setName('jack')
+    console.log(p, 'next')
+    var name = 'xiaoming'
+    function fun() {
+      var name = 'xiaohong'
+      // return {
+      //   fun: function() {
+      //     let _this = this
+      //     console.log(_this, 'fun')
+      //     return name
+      //   }
+      // }
+      return function() {
+          let _this = this
+          console.log(_this, 'fun')
+          return name
+        }
+    }
+    fun()()
+  </script>
+</body>
+</html>

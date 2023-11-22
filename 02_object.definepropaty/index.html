@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>object.defineproperty</title>
+</head>
+<body>
+  <div id="root"></div>
+  <div id="test"></div>
+  <script>
+    const obj1 = {
+      name: '小明',
+      address: '广州'
+    }
+
+    const obj2 = {
+      age: 18
+    }
+    
+    // Object.defineproperty(object, key, {
+    //   value: val,
+    //   enumerable: true, // 控制属性是否可以枚举
+    //   writable: true, // 控制属性是否可以修改
+    //   configurable: true, //控制属性是否可以删除
+    // })
+
+    Object.defineProperty(obj1, 'age', {
+      enumerabel: true,
+      get() {
+        return obj2.age
+      },
+      set(val) {
+        obj2.age = val
+        console.log(val, 'obj age 被修改了')
+      }
+    })
+
+    const root = document.getElementById('root')
+    let strRoot = '<div>这是obj1</div>'
+    Object.keys(obj1).forEach(item => {
+      strRoot += `<div>${item}---${obj1[item]}</div>`
+    })
+    root.innerHTML = strRoot
+    let str = `&nbsp;<div>这是obj2</div>`
+    const test = document.getElementById('test')
+    for (let index in obj2) {
+      const val = obj2[index];
+      str += `<div>${index}: --- ${val}</div>`
+    }
+    test.innerHTML = str
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

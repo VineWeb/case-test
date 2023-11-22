@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas Avatar and Text</title>
+</head>
+<body>
+    <canvas id="avatarCanvas" width="300" height="300"></canvas>
+    <script>
+        function drawAvatarAndText(avatarSrc, avatarX, avatarY, avatarWidth, avatarHeight, avatarRadius, text, textX, textY, textWidth, textHeight, textRadius) {
+            const canvas = document.getElementById('avatarCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Draw Avatar
+            const avatar = new Image();
+            avatar.src = avatarSrc;
+            avatar.onload = function () {
+                ctx.beginPath();
+                ctx.save();
+                ctx.arc(avatarX + avatarWidth / 2, avatarY + avatarHeight / 2, avatarRadius, 0, 2 * Math.PI);
+                ctx.clip();
+                ctx.drawImage(avatar, avatarX, avatarY, avatarWidth, avatarHeight);
+                ctx.restore();
+            };
+
+            // Draw Text
+            ctx.beginPath();
+            ctx.moveTo(textX + textRadius, textY);
+            ctx.arcTo(textX + textWidth, textY, textX + textWidth, textY + textHeight, textRadius);
+            ctx.arcTo(textX + textWidth, textY + textHeight, textX, textY + textHeight, textRadius);
+            ctx.arcTo(textX, textY + textHeight, textX, textY, textRadius);
+            ctx.arcTo(textX, textY, textX + textRadius, textY, textRadius);
+            ctx.fillStyle = 'lightblue';
+            ctx.fill();
+            ctx.fillStyle = 'black';
+            ctx.font = '20px Arial';
+            ctx.fillText(text, textX + textWidth / 2, textY + textHeight / 2);
+        }
+
+        // Example usage
+        const avatarSrc = 'https://chat.openai.com/_next/image?url=https%3A%2F%2Flh3.googleusercontent.com%2Fa%2FAAcHTtcyTrCkuGcGTcr3-j3W_v1be8qmNXGxPCs-NerBAQUvsQ%3Ds96-c&w=48&q=75';
+        const avatarX = 50;
+        const avatarY = 50;
+        const avatarWidth = 200;
+        const avatarHeight = 200;
+        const avatarRadius = 100;
+
+        const text = 'Hello, Canvas!Hello, Canvas!Hello, Canvas!Hello, Canvas!Hello, Canvas!Hello, Canvas!Hello, Canvas!';
+        const textX = 10;
+        const textY = 90;
+        const textWidth = 200;
+        const textHeight = 40;
+        const textRadius = 10;
+
+        drawAvatarAndText(avatarSrc, avatarX, avatarY, avatarWidth, avatarHeight, avatarRadius, text, textX, textY, textWidth, textHeight, textRadius);
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const setTimeoutCallBack = function() {
+      console.log('我是定时器回调')
+    }
+
+    const httpCallBack = function() {
+      console.log('我是http请求回调')
+    }
+    // 同步任务
+    console.log('我是同步任务1')
+
+    getInfo()
+
+    // 异步定时任务
+    setTimeout(setTimeoutCallBack, 1000)
+
+    // 模拟ajax请求
+    async function getInfo() {
+      setTimeout(httpCallBack, 2000)
+    }
+    
+    // 同步任务2
+    console.log('我是同步任务2')
+
+    function animation () {
+      console.log(666)
+      // requestAnimationFrame(animation)
+    }
+    animation()
+  </script>
+</body>
+</html>
