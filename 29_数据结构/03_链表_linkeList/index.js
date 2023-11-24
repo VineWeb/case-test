@@ -1,4 +1,10 @@
 // 链表 链表里面的元素存储不是连续的，之间通过next连接
+// Javascript 中 没有链表, 但是可以用 Object 模拟链表
+// 链表常用操作: 修改next (增删元素), 遍历链表
+
+
+// JS中的原型链也是一个链表, 只不过不是沿着next走, 而是__proto__
+// 使用链表指针可以获取JSON的节点值
 const a = { val: 'a' }
 const b = { val: 'b' }
 const c = { val: 'c' }
