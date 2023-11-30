@@ -177,15 +177,42 @@ var lengthOfLongestSubstring = function (s) {
 输出: ""
 解释: t 中两个字符 'a' 均应包含在 s 的子串中，
 因此没有符合条件的子字符串，返回空字符串。
- * 
+ *  
  */
-/**
+/** 时间复杂度: O(m + n), m是t的长度, n是s的长度
+ * 空间复杂度: O(m)
  * @param {string} s
  * @param {string} t
  * @return {string}
  */
 var minWindow = function (s, t) {
-
+  let l = 0
+  let r = 0;
+  const map = new Map()
+  for (const c of t) {
+    map.set(c, map.has(c) ? map.get(c) + 1 : 1)
+  }
+  const mapType = map.size
+  let res = ''
+  while (r < s.length) {
+    const c = s[r]
+    if (map.has(c)) {
+      map.set(c, map.get(c) - 1)
+      if (map.get(c) === 0) mapType -= 1
+    }
+    while (mapType === 0) {
+      const newRes = s.substring(l, r + 1)
+      if (!res || newRes.length < res.length) res = newRes
+      const c2 = s(l)
+      if (map.has(c2)) {
+        map.set(c2, map.get(c2) + 1)
+        if (map.get(c2) === 1) mapType += 1
+      }
+      l += 1
+    }
+    r += 1
+  }
+  return res
 };
 
 
