@@ -134,5 +134,63 @@ var levelOrder = function (root) {
   }
   return res
 };
-const level = levelOrder(bt)
+// const level = levelOrder(bt)
+
+
+/****
+ * 94. 二叉树的中序遍历
+ * 给定一个二叉树的根节点 root ，返回 它的 中序 遍历 。
+*/
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var inorderTraversal = function(root) {
+  const res = []
+  const stack = []
+  let p = root
+  while (stack.length || p) {
+      while (p) {
+          stack.push(p)
+          p = p.left
+      }
+      const n = stack.pop()
+      res.push(n.val)
+      p = n.right
+  }
+  return res
+};
+
+/**
+ * 112. 路径总和
+ * 给你二叉树的根节点 root 和一个表示目标和的整数 targetSum 。判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和 targetSum 。如果存在，返回 true ；否 则，返回 false 。
+
+  叶子节点 是指没有子节点的节点。
+  时间: O(n)
+  空间: 调用栈, O(logn)O(n)
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} targetSum
+ * @return {boolean}
+ */
+var hasPathSum = function(root, targetSum) {
+  if (!root) return false
+  let res = false
+  const dfs = (n, s) => {
+    console.log(n.val, s)
+    if (!n.left && !n.right && s === targetSum) {
+      res =  true;
+    }
+    if (n.left) dfs(n.left, s + n.left.val)
+    if (n.right) dfs(n.right, s + n.right.val)
+  }
+  dfs(root, root.val)
+  return res
+};
+
+const hasNum = hasPathSum(bt, 8)
+
+
+
 console.log(bt, '12')
