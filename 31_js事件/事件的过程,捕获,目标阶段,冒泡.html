@@ -1,0 +1,21 @@
+<div id="parent">
+  <button id="child">Click me</button>
+</div>
+
+<script>
+  document.getElementById('parent').addEventListener('click', function() {
+    console.log('Parent div clicked 捕获');
+  }, true); // 第三个参数设置为true，表示在捕获阶段处理事件
+
+  document.getElementById('child').addEventListener('click', function() {
+    console.log('Button clicked 捕获');
+  }, true);
+  // 目标阶段
+  document.getElementById('parent').addEventListener('click', function() {
+    console.log('Parent div clicked 冒泡');
+  });
+
+  document.getElementById('child').addEventListener('click', function() {
+    console.log('Button clicked 冒泡');
+  });
+</script>

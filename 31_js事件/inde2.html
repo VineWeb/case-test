@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Event Example</title>
+</head>
+<body>
+
+  <button id="myButton">Click me</button>
+
+  <script>
+    // 获取按钮元素
+    const myButton = document.getElementById('myButton');
+
+    // 添加自定义事件监听器
+    myButton.addEventListener('customClick', function(event) {
+      alert('Custom click event triggered!');
+    });
+
+    // 创建自定义事件对象
+    const customClickEvent = new Event('customClick', {
+      bubbles: true, // 是否冒泡
+      cancelable: true // 是否可取消
+    });
+
+    // 模拟触发自定义点击事件
+    myButton.dispatchEvent(customClickEvent);
+  </script>
+
+</body>
+</html>

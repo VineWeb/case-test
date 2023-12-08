@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 继承通过原型链实现
+    function Animal(name) {
+      this.name = name;
+    }
+
+    Animal.prototype.sayName = function() {
+      console.log('My name is ' + this.name);
+    };
+
+    function Dog(name, breed) {
+      Animal.call(this, name);
+      this.breed = breed;
+    }
+
+    // Dog.prototype = Object.create(Animal.prototype);
+    Dog.prototype = new Animal()
+    console.log(Dog.prototype.constructor, "没改前")
+    Dog.prototype.constructor = Dog;
+    console.log(Dog.prototype.constructor, "改了后")
+    Dog.prototype.bark = function() {
+      console.log('Woof!');
+    };
+
+    const myDog = new Dog('Buddy', 'Golden Retriever');
+    // console.log(myDog instanceof Dog)
+    // console.log(myDog instanceof Animal)
+    // console.log(myDog, 'myDog')
+    // console.log(myDog.__proto__, 'myDog')
+    // myDog.sayName();
+    // myDog.bark();
+
+    // o = Object.create(null);
+    // // 等价于：
+    // o = { __proto__: null };
+
+// 你可以使用 Object.create() 来模仿 new 运算符的行为。
+// function Constructor() {}
+// o = new Constructor();
+// 等价于：
+// o = Object.create(Constructor.prototype);
+// 当然，如果 Constructor 函数中有实际的初始化代码，那么 Object.create() 方法就无法反映它。
+
+
+/*
+
+当使用 new 关键字调用函数时，该函数将被用作构造函数。new 将执行以下操作：
+ 
+创建一个空的简单 JavaScript 对象。为方便起见，我们称之为 newInstance。
+如果构造函数的 prototype 属性是一个对象，则将 newInstance 的 [[Prototype]] 指向构造函数的这个属性，否则 newInstance 将保持为一个普通对象，其 [[Prototype]] 为 Object.prototype。
+备注： 因此，通过构造函数创建的所有实例都可以访问添加到构造函数 prototype 属性中的属性/对象。
+使用给定参数执行构造函数，并将 newInstance 绑定为 this 的上下文（例如，在构造函数中的所有 this 引用都指向 newInstance）。
+如果构造函数返回非原始值，则该返回值成为整个 new 表达式的结果。否则，如果构造函数未返回任何值或返回了一个原是值，则返回 newInstance。（通常构造函数不返回值，但可以选择返回值，以覆盖正常的对象创建过程。）
+*/
+  </script>
+</body>
+</html>
