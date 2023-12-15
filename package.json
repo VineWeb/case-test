@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "nodemon": "^3.0.1",
-    "vine-tools": "^1.0.0"
+    "spark-nodejs": "^0.0.6",
+    "vine-tools": "^1.0.0",
+    "ws": "^8.15.1"
   }
 }
