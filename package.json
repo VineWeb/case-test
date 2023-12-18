@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "crypto-js": "^4.2.0",
+    "js-base64": "^3.7.5",
     "nodemon": "^3.0.1",
     "spark-nodejs": "^0.0.6",
     "vine-tools": "^1.0.0",

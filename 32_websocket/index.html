@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模拟输入通讯</title>
+</head>
+<body>
+  <input id="inp" type="text" placeholder="请输入" style="width: 200px; height: 40px;"/>
+  <button id="btn">点击发送信息</button>
+  <div id="text"></div>
+
+  <script>
+    const websocket = new WebSocket('ws://localhost:3009')
+
+    websocket.onopen = (event) => {
+      console.log('WebSocket is open now')
+    }
+
+    websocket.onmessage = (event) => {
+      console.log('Message from server', event.data);
+      // 将消息显示在页面上
+      document.getElementById('text').innerHTML = event.data;
+    }
+
+    websocket.onerror = function(event) {
+      console.error('WebSocket error', event);
+    }
+
+    websocket.onclose = function(event) {
+      console.log('WebSocket is closed now.')
+    }
+
+    const btn = document.getElementById('btn')
+    btn.onclick = () => {
+      const message = document.getElementById('inp').value;
+      console.log('点击事件', message);
+      // 发送输入框中的消息
+      websocket.send(message);
+    }
+
+    // 在页面关闭时关闭WebSocket连接
+    window.onbeforeunload = () => {
+      websocket.close();
+    }
+  </script>
+</body>
+</html>
