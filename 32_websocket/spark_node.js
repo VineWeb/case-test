@@ -40,7 +40,7 @@ wss.on('connection', (socket) => {
     const webSocketServer = new Server({noServer: true})
     webSocket.on('open', () => {
         // 收到客户端发送信息，生成星火参数
-        const question = genParams('你是谁')
+        const question = genParams('秦始皇的儿子是谁')
         // console.log('question', question)
         // 发送信息到星火
         webSocket.send(JSON.stringify(question))
