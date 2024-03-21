@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DeepClone</title>
+</head>
+<body>
+  <script>
+    function deepClone (obj) {
+      if (typeof obj !== "object" || obj == 'null') {
+        return obj
+      }
+      const isArray =  Array.isArray(obj)
+      let result = isArray ? [] : {}
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          result[key] = deepClone(obj[key])
+        }
+      }
+      return result
+    }
+    const obj = { name: 'zhangsan', info: {address: '广州', age: 18}}
+    // 1. 浅拷贝
+    const obj1 = Object.assign({}, obj)
+    obj1.name = 'lisi'
+    obj1.info.address = '深圳'
+    // 2. 深拷贝  不能用于函数, 自引用, null 等
+    const obj2 = JSON.parse(JSON.stringify(obj))
+    obj2.name = 'wangwu'
+    obj2.info.address = '北京'
+    // 3. 深拷贝, 只处理Array 和 Object
+    const obj3 = deepClone(obj)
+    obj3.name = 'zhaoliu'
+    obj3.info.address = '上海'
+    console.log(obj)
+    console.log(obj1)
+    console.log(obj2)
+    console.log(obj3)
+    console.log(obj1 == obj) // false
+    console.log(obj2 == obj) // false
+    console.log(obj3 == obj) // false
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debounce</title>
+</head>
+<body>
+  输入: <input type="text" id="inp">
+  <script>
+    function debounce(fn, delay = 200) {
+      let timer = 0
+      return function () {
+        if (timer) {
+          clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+          fn.apply(this, arguments)
+          timer = 0
+        }, delay)
+      }
+    }
+    const inp = document.getElementById('inp')
+    inp.addEventListener('keyup', debounce((e) => {
+      const val = e.target.value
+      console.log(val, 'val')
+    }, 500))
+  </script>
+</body>
+</html>
