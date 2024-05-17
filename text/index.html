@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        padding: 100px;
+      }
+      .outer-circle {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .outer-circle::before {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: pink;
+        animation: ripple 2s infinite;
+      }
+
+      .inner-circle {
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        border-radius: 50%;
+        z-index: 99;
+        position: absolute;
+      }
+
+      @keyframes ripple {
+        0% {
+          transform: scale(0.8);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+      .text-el {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .text-el>div {
+        white-space: nowrap;
+        position: relative;
+        top: -20px;
+        padding: 2px 5px;
+        background-color: rgb(73, 132, 226);
+        border-radius: 10px;
+        color: #ffffff;
+      }
+      .ul {
+        margin-bottom: 200px;
+        width: 400px;
+        display: flex;
+      }
+      .li {
+        display: flex;
+        list-style: none;
+        flex: 2 0 100px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+        height: 100px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="ul">
+      <li class="li">1</li>
+      <li class="li">2</li>
+      <!-- <li class="li">3</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li>
+      <li class="li">4</li> -->
+    </ul>
+    <script>
+      const el = document.createElement("div");
+      el.className = "outer-circle";
+      const children = document.createElement("div");
+      children.className = "inner-circle";
+      el.appendChild(children);
+      const textEl = document.createElement('div');
+      textEl.className = 'text-el';
+      textEl.innerHTML = `<div>广东博物馆</div>`
+      el.appendChild(textEl)
+      document.body.appendChild(el);
+    </script>
+  </body>
+</html>
