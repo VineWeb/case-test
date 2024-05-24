@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cesium 天地图示例</title>
+    <style>
+        @import url(https://cesium.com/downloads/cesiumjs/releases/1.88/Build/Cesium/Widgets/widgets.css);
+        html, body, #cesiumContainer {
+            width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
+        }
+    </style>
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.88/Build/Cesium/Cesium.js"></script>
+</head>
+<body>
+    <div id="cesiumContainer"></div>
+    <script>
+        // 替换为你的天地图API Key
+        const tiandituKey = '4989e906aa138e5bb1b49a3eb83a6128';
+
+        // 创建Cesium Viewer
+        const viewer = new Cesium.Viewer('cesiumContainer', {
+            imageryProvider: new Cesium.WebMapTileServiceImageryProvider({
+                url: `http://t0.tianditu.gov.cn/img_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&tk=${tiandituKey}`,
+                layer: 'img',
+                style: 'default',
+                format: 'tiles',
+                tileMatrixSetID: 'w',
+                tileWidth: 256,
+                tileHeight: 256,
+                maximumLevel: 18,
+                credit: new Cesium.Credit('Tianditu Map')
+            }),
+            baseLayerPicker: false,
+            sceneMode: Cesium.SceneMode.SCENE2D, // 设置为二维模式
+            timeline: false,
+            animation: false,
+            sceneModePicker: false,
+            geocoder: false,
+            homeButton: false,
+            infoBox: false,
+            selectionIndicator: false,
+            navigationHelpButton: false,
+            fullscreenButton: false,
+        });
+
+        // 添加天地图矢量图层
+        const vectorLayer = new Cesium.WebMapTileServiceImageryProvider({
+            url: `http://t0.tianditu.gov.cn/vec_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&tk=${tiandituKey}`,
+            layer: 'vec',
+            style: 'default',
+            format: 'tiles',
+            tileMatrixSetID: 'w',
+            tileWidth: 256,
+            tileHeight: 256,
+            maximumLevel: 18,
+            credit: new Cesium.Credit('Tianditu Vector')
+        });
+
+        viewer.imageryLayers.addImageryProvider(vectorLayer);
+
+        // 添加天地图标注图层
+        const annotationLayer = new Cesium.WebMapTileServiceImageryProvider({
+            url: `http://t0.tianditu.gov.cn/cva_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cva&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&tk=${tiandituKey}`,
+            layer: 'cva',
+            style: 'default',
+            format: 'tiles',
+            tileMatrixSetID: 'w',
+            tileWidth: 256,
+            tileHeight: 256,
+            maximumLevel: 18,
+            credit: new Cesium.Credit('Tianditu Annotation')
+        });
+
+        viewer.imageryLayers.addImageryProvider(annotationLayer);
+
+        // 设置视图定位到中国广东
+        viewer.camera.setView({
+            destination: Cesium.Rectangle.fromDegrees(109.0, 20.0, 117.0, 25.0)
+        });
+
+        // 点击事件处理
+        viewer.screenSpaceEventHandler.setInputAction(function(click) {
+            const pickedObject = viewer.scene.pick(click.position);
+            if (Cesium.defined(pickedObject)) {
+                const cartesian = viewer.camera.pickEllipsoid(click.position);
+                const cartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(cartesian);
+                const lon = Cesium.Math.toDegrees(cartographic.longitude);
+                const lat = Cesium.Math.toDegrees(cartographic.latitude);
+                alert(`Clicked at longitude: ${lon}, latitude: ${lat}`);
+            }
+        }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+        // Hover事件处理
+        viewer.screenSpaceEventHandler.setInputAction(function(movement) {
+            const pickedObject = viewer.scene.pick(movement.endPosition);
+            if (Cesium.defined(pickedObject)) {
+                document.body.style.cursor = 'pointer';
+            } else {
+                document.body.style.cursor = 'default';
+            }
+        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+    </script>
+</body>
+</html>
