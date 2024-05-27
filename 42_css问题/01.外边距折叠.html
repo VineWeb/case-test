@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>外边距折叠</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body, html {
+      background-color: #e6e6e6;
+    }
+    .red, .yellow, .green {
+      width: 500px;
+      height: 200px;
+      margin-bottom: 50px;
+    }
+    .red {
+      background-color: red;
+    }
+    .red>.first {
+      margin: 10px;
+    }
+    .red>.two {
+      margin: 20px;
+    }
+    .yellow {
+      background-color: yellow;
+    }
+    .yellow>.first {
+      margin: -2px;
+      padding: 2px;
+    }
+    .yellow>.two {
+      margin: -4px;
+      padding: 2px;
+    }
+    .green {
+      background-color: green;
+      color: #fff;
+    }
+    .green>.first {
+      margin: 5px;
+    }
+    .green>.two {
+      margin: -2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="red">
+    <div class="first">10</div>
+    <div class="two">20</div>
+  </div>
+
+  <div class="yellow">
+    <div class="first">-2</div>
+    <div class="two">-4</div>
+  </div>
+
+  <div class="green">
+    <div class="first">5</div>
+    <div class="two">-2</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Example</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            height: calc(100% - 200px);
+        }
+        .header {
+            background-color: #f1f1f1;
+            padding: 20px;
+            height: 60px;
+        }
+        .content {
+            background-color: skyblue;
+            /* flex: flex-grow flex-shrink flex-basis; */
+            flex-grow: 1;
+            padding: 20px;
+            overflow: hidden;
+        }
+        .footer {
+            background-color: #f1f1f1;
+            padding: 20px;
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Header</div>
+        <div class="content">Content
+
+          <ul>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+            <li>1</li>
+          </ul>
+        </div>
+        <div class="footer">Footer</div>
+    </div>
+</body>
+</html>
