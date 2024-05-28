@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件委托</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ul {
+        margin: 20px;
+      }
+      li {
+        list-style: none;
+        cursor: pointer;
+      }
+      li:nth-of-type(2n) {
+        background-color: skyblue;
+      }
+      li:nth-of-type(2n + 1) {
+        background-color: palegoldenrod;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="ul" id="ul">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+    </ul>
+
+    <script>
+      const ulEl = document.getElementById("ul");
+      let list = document.querySelectorAll("li");
+      console.log(list, "list");
+      ulEl.addEventListener("click", (e) => {
+        const target = e.target;
+        console.log(target, 'target')
+        for (let i = 0; i < list.length; i++) {
+          const el = list[i];
+          if(el === target) {
+            console.log(`点击第${i+1}个li，内容是${target.innerHTML}`)
+          }
+        }
+      });
+      for (let index = 0; index < 5; index++) {
+        const li = document.createElement('li')
+        li.innerHTML = list.length + index + 1
+        ulEl.appendChild(li)
+        // list = document.querySelectorAll("li");
+      }
+    </script>
+  </body>
+</html>
