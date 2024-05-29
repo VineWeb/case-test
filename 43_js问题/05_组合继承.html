@@ -24,7 +24,10 @@
     }
 
     Child.prototype = new Parent()
-    Child.constructor = Child
+    console.log(Child.prototype.constructor, '_________before_______')
+    // 将 Child 的原型对象的 constructor 属性指回 Child 构造函数
+    Child.prototype.constructor = Child
+    console.log(Child.prototype.constructor, '_________after_______')
     Child.prototype.sayAge = function () {
       console.log(this.age)
     }
