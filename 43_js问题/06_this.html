@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>This</title>
+</head>
+<body>
+  <div>This</div>
+  <script>
+    console.log('this :', this) // 输出: Window {}
+    function fooFn() {
+      console.log('fooFn this : ',this);
+    }
+    const obj = { name: 'zhangsan', age: 18 }
+    fooFn.call(obj) // 输出: obj
+
+
+    const methodFn = {
+        method: function() {
+            console.log('methodFn this:',this);
+        }
+    };
+
+    methodFn.method() // 输出: methodFn
+
+    
+    function Person(name) {
+      this.name = name;
+      console.log('Person 实例 this: ', this) // 输出 person1
+    }
+
+    const person1 = new Person('Alice');
+    console.log(person1.name); // 输出：Alice
+
+
+  const arrowObject = {
+    name: 'zhangsan',
+    age: 18,
+    sayName: function() {
+      const arrowFunc = () => {
+        console.log('sayName Fn arrowFunc this:', this);
+      };
+      arrowFunc();
+    }
+  };
+  arrowObject.sayName(); // 输出：arrowObject
+
+  console.log('**********---------------**********')
+
+  function fn() {
+    console.log('fn this:', this)
+  }
+  const person = { name: 'zhangsan', age: 18 }
+  fn.call(person) // 输出：person
+  fn.apply(person) // 输出：person
+
+  const bindFn = fn.bind(person)
+  bindFn() // 输出：person
+  </script>
+</body>
+</html>
