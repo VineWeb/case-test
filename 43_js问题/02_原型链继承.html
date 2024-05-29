@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原型链继承</title>
+</head>
+<body>
+  <div>原型链继承</div>
+  <script>
+    function Parent(name) {
+      this.name = name
+      this.colors = ['red', 'yellow', 'green']
+    }
+    Parent.prototype.sayName = function () {
+      console.log(this.name)
+    }
+
+    function Child(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+
+    Child.prototype = new Parent()
+    Child.prototype.constructor = Child
+    Child.prototype.sayAge = function () {
+      console.log(this.age)
+    }
+
+    const child = new Child('zhangsan', 18)
+    const child1 = new Child('lisi', 20)
+    child.sayName()
+    child.sayAge()
+    child.colors[1] = 'blue'
+    console.log(child.colors, 'child colors')
+    console.log(child1.colors, 'child1 colors')
+  </script>
+</body>
+</html>

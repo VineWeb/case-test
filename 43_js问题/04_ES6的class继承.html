@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ES6的class继承</title>
+</head>
+<body>
+  <div>ES6的class继承</div>
+  <script>
+    class Parent {
+      constructor(name) {
+        this.name = name
+        this.colors = ['red', 'yellow', 'green']
+      }
+
+      sayName() {
+        console.log(this.name)
+      }
+    }
+
+    class Child extends Parent {
+      constructor(name, age) {
+        super(name)
+        this.age = age
+      }
+      sayAge() {
+        console.log(this.age)
+      }
+    }
+
+    const child = new Child('zhangsan', 18)
+    child.sayName()
+    child.sayAge()
+    console.log(child.colors)
+    console.log(child)
+  </script>
+</body>
+</html>
