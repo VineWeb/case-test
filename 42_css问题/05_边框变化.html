@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>边框效果</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #f6f6f6;
+    }
+    .outer {
+      width: 400px;
+      height: 200px;
+      margin: 100px;
+      background-color: rgb(54, 224, 202);
+      padding: 2px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+    .inner {
+      background-color: rgb(99, 99, 99);
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+      border-radius: 20px;
+    }
+    .moving-element {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 80px;
+      height: 80px;
+      /* background-color: #fff; */
+      animation: moveAround 8s linear infinite;
+
+      border-radius: 40px;
+      transform: translate(-40px, -40px);
+
+      background-image: radial-gradient(#f00 40%,  transparent 80%);
+    }
+    /* 
+    计算总路径长度：总长度 = 2（宽度+高度）
+    计算每段所占的事件比例：水平边所占比例 = 宽度 / 总长度;  垂直边所占比例 = 高度/总长度 
+    */
+    @keyframes moveAround {
+      /* 0%, 100% {
+        top: 0px;
+        left: 0px;
+      }
+      33.33% {
+        top: 0px;
+        left: 100%;
+      }
+      50% {
+        top: 100%;
+        left: 100%;
+      }
+      83.33% {
+        top: 100%;
+        left: 0px;
+      } */
+      0% { left: 40px; top: 0 }
+      28.93% { left: 360px; top: 0 }
+      33.99% { left: 400px; top: 40px }
+      44.82% { left: 400px; top: 160px }
+      49.88% { left: 360px; top: 200px }
+      78.81% { left: 40px; top: 200px }
+      83.87% { left: 0; top: 160px }
+      94.70% { left: 0; top: 40px }
+      100% { left: 40px; top: 0 }
+    }
+  </style>
+</head>
+<body>
+  <div class="outer">
+    <div class="inner"></div>
+    <div class="moving-element"></div>
+  </div>
+</body>
+</html>
