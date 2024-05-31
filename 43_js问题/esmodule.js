@@ -1,5 +1,3 @@
-const name = 'esModule'
-
-export const appName = 'app'
+export const name = 'app'
 
 export default {name, age: 18}
