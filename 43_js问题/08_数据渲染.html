@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据渲染</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <ul>数据</ul>
+  <script>
+   setTimeout(() => {
+    const total = 1000000
+    const pageNum = 20
+
+    // 渲染数据总共需要几次
+    const loopCount = total / pageNum
+
+    let count = 0
+    const ul = document.querySelector('ul')
+
+    function render() {
+      const fragment = document.createDocumentFragment()
+      for (let i = 0; i < pageNum; i++) {
+        const li = document.createElement('li')
+        li.innerHTML = (i+1)+(count*20)
+        fragment.appendChild(li)
+      }
+      ul.appendChild(fragment)
+      count += 1
+      loop()
+    }
+    function loop() {
+      if (count < loopCount) {
+        window.requestAnimationFrame(render)
+      }
+    }
+    render()
+
+   }, 0)
+  </script>
+</body>
+</html>
