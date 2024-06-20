@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>Cesium 天地图示例</title>
     <style>
-        @import url(https://cesium.com/downloads/cesiumjs/releases/1.88/Build/Cesium/Widgets/widgets.css);
+        /* @import url(https://cesium.com/downloads/cesiumjs/releases/1.88/Build/Cesium/Widgets/widgets.css); */
         html, body, #cesiumContainer {
             width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
         }
     </style>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.83/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+    
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.88/Build/Cesium/Cesium.js"></script>
 </head>
 <body>
@@ -85,27 +87,36 @@
             destination: Cesium.Rectangle.fromDegrees(109.0, 20.0, 117.0, 25.0)
         });
 
-        // 点击事件处理
-        viewer.screenSpaceEventHandler.setInputAction(function(click) {
-            const pickedObject = viewer.scene.pick(click.position);
-            if (Cesium.defined(pickedObject)) {
-                const cartesian = viewer.camera.pickEllipsoid(click.position);
-                const cartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(cartesian);
-                const lon = Cesium.Math.toDegrees(cartographic.longitude);
-                const lat = Cesium.Math.toDegrees(cartographic.latitude);
-                alert(`Clicked at longitude: ${lon}, latitude: ${lat}`);
+        var handler = new Cesium.ScreenSpaceEventHandler(viewer.scene.canvas);
+
+        handler.setInputAction(function(click) {
+            var position = viewer.camera.pickEllipsoid(click.position, viewer.scene.globe.ellipsoid);
+            console.log(position, 'position')
+            if (position) {
+                var cartographic = Cesium.Cartographic.fromCartesian(position);
+                var longitude = Cesium.Math.toDegrees(cartographic.longitude);
+                var latitude = Cesium.Math.toDegrees(cartographic.latitude);
+                console.log('Clicked at (longitude, latitude): ', longitude, latitude);
             }
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
-        // Hover事件处理
-        viewer.screenSpaceEventHandler.setInputAction(function(movement) {
-            const pickedObject = viewer.scene.pick(movement.endPosition);
-            if (Cesium.defined(pickedObject)) {
-                document.body.style.cursor = 'pointer';
-            } else {
-                document.body.style.cursor = 'default';
-            }
-        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+        // // Hover事件处理
+        // viewer.screenSpaceEventHandler.setInputAction(function(movement) {
+        //     const pickedObject = viewer.scene.pick(movement.endPosition);
+        //     if (Cesium.defined(pickedObject)) {
+        //         document.body.style.cursor = 'pointer';
+        //     } else {
+        //         document.body.style.cursor = 'default';
+        //     }
+        // }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+        // viewer.screenSpaceEventHandler.setInputAction(function(click) {
+        //     var position = click.position
+        //     console.log(click, 'click _obj')
+        //     if (Cesium.defined(position)) {
+        //         // 获取点击位置的地理坐标
+        //         console.log("点击位置的地理坐标：", position);
+        //     }
+        // }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
     </script>
 </body>
 </html>
