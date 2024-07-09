@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>获取数组中重复次数最多的一个 Get the one with the highest number of repetitions in the array</title>
+  </head>
+  <body>
+    <div id="num"></div>
+    <div id="len"></div>
+    <script>
+      const arr = [1, 1, 2, 4, 1, 25, 1, 1, 5, 4, 1, 5, 7, 6, 3, 2, 2, 2, 2, 3, 5];
+      const numEl = document.getElementById('num')
+      const lenEl = document.getElementById('len')
+      function getArrayNums (arr) {
+        const record = {}
+        for (const key of arr) {
+          if (record[key]) {
+            record[key]++
+          } else {
+            record[key] = 1
+          }
+        }
+
+        let maxLen = 0
+        let numKey = ''
+        for (const i in record) {
+          if (record[i]>maxLen) {
+            maxLen = record[i]
+            numKey = i
+          }
+        }
+        return {
+          key: numKey,
+          value: maxLen
+        }
+      }
+      const obj = getArrayNums(arr)
+      numEl.innerHTML = `重复次数最多的是${obj.key}`
+      lenEl.innerHTML = `最多为${obj.value}次`
+    </script>
+  </body>
+</html>
