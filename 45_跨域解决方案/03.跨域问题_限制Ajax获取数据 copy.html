@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03.跨域问题_限制Ajax获取数据</title>
+</head>
+<body>
+  <button id="btn">获取数据</button>
+  <script>
+    const btn = document.getElementById('btn')
+    btn.onclick = () => {
+      getNews()
+    }
+    async function getNews() {
+      const url = 'http://127.0.0.1:8081/getUsers'
+      // const url = 'https://www.toutiao.com/hot-event/hot-board'
+      const res = await fetch(url)
+      const data = await res.json()
+      console.log(data);
+    }
+  </script>
+</body>
+</html>

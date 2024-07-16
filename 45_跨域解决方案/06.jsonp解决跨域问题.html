@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>06.jsonp解决跨域问题</title>
+</head>
+<body>
+  <button id="btn">获取数据</button>
+  <script>
+    const btn = document.getElementById('btn')
+    btn.onclick = () => {
+      getNews()
+    }
+    function test(data) {
+      console.log('test 回调调用了', data)
+    }
+    async function getNews() {
+      const script = document.createElement('script')
+      script.onload = () => {
+        script.remove()
+      }
+
+      script.src = 'http://127.0.0.1:8081/getPeoples?callback=test'
+      document.body.appendChild(script)
+    }
+  </script>
+</body>
+</html>

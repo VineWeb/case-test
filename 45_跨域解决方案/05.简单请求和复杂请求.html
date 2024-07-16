@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05.简单请求和复杂请求</title>
+</head>
+<body>
+  <button id="btn">获取数据</button>
+  <script>
+    const btn = document.getElementById('btn')
+    btn.onclick = () => {
+      getNews()
+    }
+    // 简单请求
+    /*
+    1. 请求方法（method）：`GET`、`HEAD`、 `POST`
+    2. 只要不手动修改请求头，一般都能符合该规范。
+    3. 请求头的`Content-Type`的值只能是以下三种
+      1. `application/x-www-form-urlencoded`
+      2. `multipart/form-data`
+      3. `text/plain`
+    */
+   // 复杂请求  除却简单请求外就是复杂请求
+    async function getNews() {
+      const url = 'http://127.0.0.1:8081/getUsers'
+      // const url = 'https://www.toutiao.com/hot-event/hot-board'
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          abc: '123',
+          // 'Content-Type': 'text/plain'
+          // 'Content-Type': 'multipart/form-data'
+          // 'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
+        },
+
+      })
+
+
+      const data = await res.json()
+      console.log(data);
+    }
+  </script>
+</body>
+</html>

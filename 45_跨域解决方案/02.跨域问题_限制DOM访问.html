@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02.跨域问题_限制DOM访问.html</title>
+  <style>
+    iframe { 
+      border: 1px solid #ccc;
+      width: 800px;
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <h1>我是页面1</h1>
+  <button onclick="getDom()">获取页面2的DOM</button>
+  <br>
+  <br>
+  <hr>
+  <iframe id="framePage" src="https://www.meituan.com/"></iframe>
+  <script>
+    function getDom() {
+      const iframe = document.querySelector('iframe')
+      const dom = iframe.contentWindow.document
+      console.log(dom)
+    }
+  </script>
+</body>
+</html>

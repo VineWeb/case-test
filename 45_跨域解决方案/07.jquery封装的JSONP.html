@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>07.jquery封装的JSONP</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+  <button id="btn">获取数据</button>
+  <script>
+    const btn = document.getElementById('btn')
+    btn.onclick = () => {
+      getNews()
+    }
+    function getNews() {
+      $.getJSON('http://127.0.0.1:8081/getPeoples?callback=?', (data) => {
+        console.log('getNews 回调调用了', data)
+      })
+    }
+  </script>
+</body>
+</html>
