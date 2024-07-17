@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Object.defineProperty</title>
+</head>
+<body>
+  <h1>Object.defineProperty</h1>
+  <p>Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回这个对象。</p>
+  <p>Object.defineProperty(obj, prop, descriptor)</p>
+  <p>obj：要在其上定义属性的对象。</p>
+  <script>
+    function defineReactive(obj, key) {
+      let val = obj[key];
+      Object.defineProperty(obj, key, {
+        enumerable: true,
+        configurable: true,
+        get: function() {
+          console.log('get', key, val);
+          return val;
+        },
+        set: function(newVal) {
+          console.log('set', key, newVal);
+          val = newVal;
+        }
+      });
+    }
+    const obj = { name: '张三', age: 18 }
+    defineReactive(obj, 'name');
+    console.log(obj.name);
+    obj.name = '王五';
+    console.log(obj.name);
+
+    const info = { city: '北京', country: '中国' }
+    function proxyReactive(obj) {
+      const handler = {
+        get: function(target, key) {
+          console.log('get', key, target[key]);
+          return Reflect.get(target, key);
+        },
+        set: function(target, key, newVal) {
+          console.log('set', key, newVal);
+          const result = Reflect.set(target, key, newVal)
+          return result
+        }
+      };
+      return new Proxy(obj, handler);
+    }
+    const proxyInfo = proxyReactive(info)
+    console.log(proxyInfo.city);
+    proxyInfo.city = '上海';
+    console.log(proxyInfo.city);
+  </script>
+</body>
+</html>
